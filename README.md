@@ -1,13 +1,10 @@
-<p align="center">
-  <a href="" rel="noopener">
- <img width=200px height=200px src="https://i.imgur.com/QfNbRxi.png" alt="PvPGN-PRO Docker"></a>
-</p>
-
-<h3 align="center">PvPGN Server Docker</h3>
-
 <div align="center">
 
-[![Status](https://img.shields.io/badge/status-active-success.svg)]()
+  ![PvPGN-PRO Docker](https://i.imgur.com/QfNbRxi.png)
+
+### PvPGN Server Docker
+
+![Status](https://img.shields.io/badge/status-active-success.svg)
 [![GitHub Issues](https://img.shields.io/github/issues/wwmoraes/pvpgn-server-docker.svg)](https://github.com/wwmoraes/pvpgn-server-docker/issues)
 [![GitHub Pull Requests](https://img.shields.io/github/issues-pr/wwmoraes/pvpgn-server-docker.svg)](https://github.com/wwmoraes/pvpgn-server-docker/pulls)
 [![License](https://img.shields.io/badge/license-AL2-blue.svg)](/LICENSE)
@@ -16,9 +13,7 @@
 
 ---
 
-<p align="center"> A simple docker and docker-compose for running a PvPGN-PRO server in no time
-    <br>
-</p>
+> A simple docker and docker-compose for running a PvPGN-PRO server in no time
 
 ## 📝 Table of Contents
 
@@ -27,8 +22,8 @@
 - [Deployment](#deployment)
 - [Usage](#usage)
 - [Built Using](#built_using)
-<!-- - [TODO](../TODO.md) -->
-<!-- - [Contributing](../CONTRIBUTING.md) -->
+- [TODO](https://github.com/wwmoraes/pvpgn-server-docker/blob/master/TODO.md)
+- [Contributing](https://github.com/wwmoraes/pvpgn-server-docker/blob/master/CONTRIBUTING.md)
 - [Acknowledgments](#acknowledgement)
 
 ## 🧐 About <a name = "about"></a>
