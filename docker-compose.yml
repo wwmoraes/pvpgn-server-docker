@@ -1,0 +1,19 @@
+version: '3'
+services:
+  pvpgn-server:
+    build: .
+    ports:
+    - "6112:6112"
+    - "4000:4000"
+    volumes:
+    - pvpgn-var:/usr/local/pvpgn/var
+    - pvpgn-etc:/usr/local/pvpgn/etc
+    depends_on:
+      - mysql
+    links:
+      - mysql
+  mysql:
+    image: mysql
+volumes:
+  pvpgn-var:
+  pvpgn-etc:
