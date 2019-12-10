@@ -3,12 +3,8 @@ buildx:
 	@docker buildx build -t pvpgn-server:latest .
 
 .PHONY: build
-build: src
+build:
 	@docker build -t pvpgn-server:latest .
-
-.PHONY: src
-src:
-	@if [ ! -d pvpgn-server ]; then git clone https://github.com/pvpgn/pvpgn-server.git; fi
 
 .PHONY: ls
 ls:
