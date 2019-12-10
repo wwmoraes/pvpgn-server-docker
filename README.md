@@ -43,6 +43,17 @@ These instructions will get you a copy of the project up and running on your loc
 
 You'll need docker at least [docker](https://docs.docker.com/install/) to run the base image, and [docker-compose](https://docs.docker.com/compose/install/) to run the full-blown server.
 
+The repository also has multi-arch support for Docker Hub, and local builds through [docker buildx](https://docs.docker.com/buildx/working-with-buildx/).
+
+#### Buildx (optional)
+
+To work with multiple architecture builds, you need to:
+
+- enable docker experimental features by editing Docker's `config.json` and setting the `experimental` flag to `enabled`
+- create and activate a new buildx builder using `docker buildx create --name multiarch --use`
+
+after that you can just `make buildx`.
+
 ### Installing
 
 Pull the image from Docker Hub:
@@ -51,9 +62,9 @@ Pull the image from Docker Hub:
 docker pull wwmoraes/pvpgn-server
 ```
 
-Then run:
+Then/or just run:
 ```sh
-docker run --rm -it pvpgn-server:latest # or make run
+docker run --rm -it wwmoraes/pvpgn-server:latest # or make run
 ```
 
 ## 🎈 Usage <a name="usage"></a>
