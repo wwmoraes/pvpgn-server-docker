@@ -1,0 +1,21 @@
+image: wwmoraes/pvpgn-server:latest
+manifests:
+  - image: wwmoraes/pvpgn-server:amd64
+    platform:
+      architecture: amd64
+      os: linux
+  - image: wwmoraes/pvpgn-server:arm32v6
+    platform:
+      architecture: arm
+      os: linux
+      variant: v6
+  - image: wwmoraes/pvpgn-server:arm32v7
+    platform:
+      architecture: arm
+      os: linux
+      variant: v7
+  - image: wwmoraes/pvpgn-server:arm64v8
+    platform:
+      architecture: arm64
+      os: linux
+      variant: v8

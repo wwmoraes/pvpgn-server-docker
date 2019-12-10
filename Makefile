@@ -1,3 +1,7 @@
+.PHONY: buildx
+buildx:
+	@docker buildx build -t pvpgn-server:latest .
+
 .PHONY: build
 build: src
 	@docker build -t pvpgn-server:latest .
