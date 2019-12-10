@@ -1,6 +1,12 @@
+.DEFAULT_GOAL := build
+
 .PHONY: buildx
 buildx:
-	@docker buildx build -t pvpgn-server:latest .
+	@docker buildx build --platform linux/amd64,linux/arm64,linux/arm/v7,linux/arm/v6 -t wwmoraes/pvpgn-server:latest .
+
+.PHONY: inspect
+inspect:
+	@docker buildx imagetools inspect wwmoraes/pvpgn-server:latest
 
 .PHONY: build
 build:
