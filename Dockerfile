@@ -16,9 +16,7 @@ RUN cmake \
   -D WITH_MYSQL=${WITH_MYSQL} \
   -D WITH_LUA=${WITH_LUA} \
   -D CMAKE_INSTALL_PREFIX=/usr/local/pvpgn \
-  -Wno-dev \
-  -Wshift-count-overflow \
-  -Woverflow \
+  -w \
   ../
 
 ### Install
