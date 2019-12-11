@@ -1,0 +1,19 @@
+#!/bin/bash
+# hooks/build
+# https://docs.docker.com/docker-cloud/builds/advanced/
+
+# $IMAGE_NAME var is injected into the build so the tag is correct.
+echo "[***] Buildx started"
+
+for ARCH in $ARCHITECTURES; do
+  echo "[***] Building ${ARCH} image"
+  PLATFORM="PLATFORM_$(echo $ARCH | awk '{print toupper($0)}')"
+  echo docker buildx build \
+    --platform=${!PLATFORM} \
+    -f Dockerfile \
+    -t $DOCKER_REPO:$ARCH \
+    .
+
+  echo "[***] Pushing ${ARCH} image"
+  echo docker push $DOCKER_REPO:$ARCH
+done
