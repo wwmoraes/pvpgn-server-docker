@@ -1,11 +1,11 @@
-FROM alpine as builder
+FROM alpine:latest as builder
 
 ARG REPO=https://github.com/pvpgn/pvpgn-server.git
 ARG WITH_MYSQL=true
 ARG WITH_LUA=true
 
 ### Install build dependencies
-RUN apk add git build-base clang cmake make zlib-dev lua-dev mariadb-dev
+RUN apk --no-cache add git build-base clang cmake make zlib-dev lua-dev mariadb-dev
 
 ### CMake & make
 RUN git clone ${REPO} /src
@@ -23,7 +23,7 @@ RUN cmake \
 RUN make
 RUN make install
 
-FROM alpine as runner
+FROM alpine:latest as runner
 
 ### Install dependencies
 RUN apk --no-cache add ca-certificates libstdc++ libgcc lua5.1-libs mariadb-connector-c
