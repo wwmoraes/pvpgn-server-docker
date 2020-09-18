@@ -39,6 +39,35 @@ Yet another [pvpgn-docker](https://github.com/search?q=pvpgn-docker) project. Ai
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See [deployment](#deployment) for notes on how to deploy the project on a live system.
 
+## 🚀 Deployment <a name = "deployment"></a>
+
+First you need to copy over the configuration files and state structure. To do
+so on a bind volume (i.e. host directory) do:
+
+```shell
+mkdir {var,etc}
+docker run --rm -v $PWD/var:/mnt/var wwmoraes/pvpgn-server cp -r /usr/local/pvpgn/var/pvpgn /mnt/var
+docker run --rm -v $PWD/etc:/mnt/etc wwmoraes/pvpgn-server cp -r /usr/local/pvpgn/etc/pvpgn /mnt/etc
+```
+
+configure as needed by changing the files on `$PWD/etc/pvpgn` and then run with
+
+```shell
+docker run -it -v $PWD/etc:/usr/local/pvpgn/etc -v $PWD/var:/usr/local/pvpgn/var -p 4000:4000 -p 6112:6112 wwmoraes/pvpgn-server
+```
+
+If you want to use a docker volume then use the `create-var-volume.sh` and `create-etc-volume.sh` scripts:
+
+```shell
+./scripts/create-var-volume.sh pvpgn-etc pvpgn-var
+```
+
+then run with
+
+```shell
+docker run -it -v pvpgn-etc:/usr/local/pvpgn/etc -v pvpgn-var:/usr/local/pvpgn/var -p 4000:4000 -p 6112:6112 wwmoraes/pvpgn-server
+```
+
 ### Prerequisites
 
 You'll need docker at least [docker](https://docs.docker.com/install/) to run the base image, and [docker-compose](https://docs.docker.com/compose/install/) to run the full-blown server.
@@ -52,6 +81,7 @@ docker pull wwmoraes/pvpgn-server
 ```
 
 Then/or just run:
+
 ```sh
 docker run --rm -it wwmoraes/pvpgn-server:latest # or make run
 ```
