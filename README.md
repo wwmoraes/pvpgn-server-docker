@@ -98,3 +98,4 @@ For detailed info about it read through the [PvPGN-PRO](https://pvpgn.pro/) docs
 ## 🎉 Acknowledgements <a name = "acknowledgement"></a>
 
 - [PvPGN-PRO](https://github.com/pvpgn/pvpgn-server) and its maintainers, which are keeping alive the legacy of PvPGN
+- [@ibepeer](https://github.com/ibepeer) for feedback on #3, which ended on a BRANCH build arg (to clone from develop, for instance)

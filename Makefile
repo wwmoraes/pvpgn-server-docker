@@ -7,7 +7,11 @@ REPO := $(OWNER)/$(PROJECT)
 
 .PHONY: build
 build:
-	@docker build -t $(REPO):latest .
+	@docker build -t $(REPO):$(TAG) .
+
+.PHONY: build-develop
+build:
+	@docker build --build-arg BRANCH=develop -t $(REPO):$(TAG) .
 
 .PHONY: ls
 ls:

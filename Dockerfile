@@ -1,6 +1,7 @@
 FROM alpine:latest as builder
 
 ARG REPO=https://github.com/pvpgn/pvpgn-server.git
+ARG BRANCH=master
 ARG WITH_MYSQL=true
 ARG WITH_LUA=true
 
@@ -8,7 +9,7 @@ ARG WITH_LUA=true
 RUN apk --no-cache add git build-base clang cmake make zlib-dev lua-dev mariadb-dev
 
 ### CMake & make
-RUN git clone ${REPO} /src
+RUN git clone --single-branch --branch ${BRANCH} ${REPO} /src
 RUN mkdir build
 WORKDIR /src/build
 RUN mkdir /usr/local/pvpgn
