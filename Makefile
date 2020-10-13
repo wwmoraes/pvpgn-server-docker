@@ -27,7 +27,7 @@ export:
 
 .PHONY: run
 run:
-	@docker run --rm -it $(REPO):$(TAG)
+	@docker run --rm -p 4000:4000 -p 6112:6112 -it $(REPO):$(TAG)
 
 .PHONY: sh
 sh:
