@@ -1,4 +1,0 @@
-#!/bin/bash
-
-echo "[***] Removing $IMAGE_NAME manifest"
-rm manifest.yaml
