@@ -17,9 +17,10 @@ RUN apk --quiet --no-cache add \
 ARG REPO=https://github.com/pvpgn/pvpgn-server.git
 ARG BRANCH=master
 RUN git clone --single-branch --branch ${BRANCH} ${REPO} /src
-RUN mkdir build
+
+RUN mkdir /src/build /usr/local/pvpgn
 WORKDIR /src/build
-RUN mkdir /usr/local/pvpgn
+
 ARG WITH_MYSQL=true
 ARG WITH_LUA=true
 RUN cmake \
@@ -29,8 +30,7 @@ RUN cmake \
   ../
 
 ### Install
-RUN make
-RUN make install
+RUN make && make install
 
 FROM alpine:latest as runner
 
