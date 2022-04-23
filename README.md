@@ -52,9 +52,10 @@ Then/or just run:
 docker run -it wwmoraes/pvpgn-server
 ```
 
-PvPGN-PRO is built and installed under the `/usr/local/pvpgn` prefix, so all its
-files can be found there. For instance, the configuration and data are located
-at `/usr/local/pvpgn/etc` and `/usr/local/pvpgn/var` respectively.
+PvPGN-PRO is built and installed on the root filesystem. A sample configuration
+can be found at `/etc/pvpgn`. Data (logs, storage, scripts, etc) can be found
+at `/var/pvpgn`. These are the default locations `bnetd` will use, unless you
+configure it to use distinct paths.
 
 ## 🚀 Deployment <a name = "deployment"></a>
 
@@ -64,8 +65,8 @@ container:
 
 ```sh
 docker run -it -p 6112:6112 -p 4000:4000 \
-  -v <your-config-volume-or-path>:/usr/local/pvpgn/etc \
-  -v <your-data-volume-or-path>:/usr/local/pvpgn/var \
+  -v <your-config-volume-or-path>:/etc/pvpgn \
+  -v <your-data-volume-or-path>:/var/pvpgn \
   wwmoraes/pvpgn-server
 ```
 
@@ -74,13 +75,16 @@ writable by the server user and group. The image default is 1001.
 
 ## 🎈 Usage <a name="usage"></a>
 
+The build is done with Lua script support enabled, and MySQL support for the
+account backend.
+
 You can create persistent local volumes for the config and data without starting
 the server with:
 
 ```sh
 docker run --rm --entrypoint=true \
-  -v <your-config-volume-name>:/usr/local/pvpgn/etc \
-  -v <your-data-volume-name>:/usr/local/pvpgn/var \
+  -v <your-config-volume-name>:/etc/pvpgn \
+  -v <your-data-volume-name>:/var/pvpgn \
   wwmoraes/pvpgn-server
 ```
 
@@ -96,12 +100,12 @@ mkdir {var,etc}
 docker run --rm --entrypoint=cp --user "$(id -u):$(id -g)" \
   -v $PWD/var:/mnt/var \
   wwmoraes/pvpgn-server \
-  -r /usr/local/pvpgn/var/pvpgn /mnt/var
+  -r /var/pvpgn /mnt/var
 
 docker run --rm --entrypoint=cp --user "$(id -u):$(id -g)" \
   -v $PWD/etc:/mnt/etc \
   wwmoraes/pvpgn-server \
-  -r /usr/local/pvpgn/etc/pvpgn /mnt/etc
+  -r /etc/pvpgn /mnt/etc
 ```
 
 Please refer to the upstream documentation on how to configure your server.
