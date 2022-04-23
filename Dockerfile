@@ -10,6 +10,7 @@ RUN apk --quiet --no-cache add \
   zlib-dev \
   lua-dev \
   mariadb-dev \
+  curl-dev \
   && rm -rf /var/cache/apk/* \
   ;
 
