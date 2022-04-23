@@ -1,7 +1,17 @@
 FROM alpine:latest as builder
 
 ### Install build dependencies
-RUN apk --no-cache add git build-base clang cmake make zlib-dev lua-dev mariadb-dev
+RUN apk --quiet --no-cache add \
+  git \
+  build-base \
+  clang \
+  cmake \
+  make \
+  zlib-dev \
+  lua-dev \
+  mariadb-dev \
+  && rm -rf /var/cache/apk/* \
+  ;
 
 ### CMake & make
 ARG REPO=https://github.com/pvpgn/pvpgn-server.git
@@ -26,7 +36,14 @@ RUN make install
 FROM alpine:latest as runner
 
 ### Install dependencies
-RUN apk --no-cache add ca-certificates libstdc++ libgcc lua5.1-libs mariadb-connector-c
+RUN apk --quiet --no-cache add \
+  ca-certificates \
+  libstdc++ \
+  libgcc \
+  lua5.1-libs \
+  mariadb-connector-c \
+  && rm -rf /var/cache/apk/* \
+  ;
 
 ### Copy build files
 COPY --from=builder /usr/local/pvpgn /usr/local/pvpgn
