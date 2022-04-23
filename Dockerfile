@@ -81,3 +81,4 @@ USER pvpgn
 
 ### RUN!
 CMD ["/usr/local/pvpgn/sbin/bnetd", "-f"]
+ENTRYPOINT ["/usr/local/pvpgn/sbin/bnetd"]
