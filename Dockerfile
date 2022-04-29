@@ -20,7 +20,7 @@ ARG BRANCH=master
 RUN git clone --depth 1 --single-branch --branch ${BRANCH} ${REPO} /src
 
 RUN mkdir /src/build /usr/local/pvpgn
-WORKDIR /src/build
+WORKDIR /src
 
 ENV WITH_LUA=true
 ENV WITH_MYSQL=false
@@ -31,14 +31,14 @@ ENV WITH_ODBC=false
 ################################################################################
 FROM build-base AS build-plain
 
-RUN cmake \
+RUN cmake -G "Unix Makefiles" -H./ -B./build \
   -D WITH_LUA=${WITH_LUA} \
   -D WITH_MYSQL=${WITH_MYSQL} \
   -D WITH_SQLITE3=${WITH_SQLITE3} \
   -D WITH_PGSQL=${WITH_PGSQL} \
   -D WITH_ODBC=${WITH_ODBC} \
   -D CMAKE_INSTALL_PREFIX=/ \
-  ../ && make
+  ../ && cd build && make
 
 ################################################################################
 FROM build-base AS build-mysql
@@ -50,14 +50,14 @@ RUN apk --quiet --no-cache add \
 
 ENV WITH_MYSQL=true
 
-RUN cmake \
+RUN cmake -G "Unix Makefiles" -H./ -B./build \
   -D WITH_LUA=${WITH_LUA} \
   -D WITH_MYSQL=${WITH_MYSQL} \
   -D WITH_SQLITE3=${WITH_SQLITE3} \
   -D WITH_PGSQL=${WITH_PGSQL} \
   -D WITH_ODBC=${WITH_ODBC} \
   -D CMAKE_INSTALL_PREFIX=/ \
-  ../ && make
+  ../ && cd build && make
 
 ################################################################################
 FROM build-base AS build-pgsql
@@ -69,14 +69,14 @@ RUN apk --quiet --no-cache add \
 
 ENV WITH_PGSQL=true
 
-RUN cmake \
+RUN cmake -G "Unix Makefiles" -H./ -B./build \
   -D WITH_LUA=${WITH_LUA} \
   -D WITH_MYSQL=${WITH_MYSQL} \
   -D WITH_SQLITE3=${WITH_SQLITE3} \
   -D WITH_PGSQL=${WITH_PGSQL} \
   -D WITH_ODBC=${WITH_ODBC} \
   -D CMAKE_INSTALL_PREFIX=/ \
-  ../ && make
+  ../ && cd build && make
 
 ################################################################################
 FROM build-base AS build-sqlite3
@@ -88,14 +88,14 @@ RUN apk --quiet --no-cache add \
 
 ENV WITH_SQLITE3=true
 
-RUN cmake \
+RUN cmake -G "Unix Makefiles" -H./ -B./build \
   -D WITH_LUA=${WITH_LUA} \
   -D WITH_MYSQL=${WITH_MYSQL} \
   -D WITH_SQLITE3=${WITH_SQLITE3} \
   -D WITH_PGSQL=${WITH_PGSQL} \
   -D WITH_ODBC=${WITH_ODBC} \
   -D CMAKE_INSTALL_PREFIX=/ \
-  ../ && make
+  ../ && cd build && make
 
 ################################################################################
 FROM build-base AS build-odbc
@@ -107,19 +107,20 @@ RUN apk --quiet --no-cache add \
 
 ENV WITH_ODBC=true
 
-RUN cmake \
+RUN cmake -G "Unix Makefiles" -H./ -B./build \
   -D WITH_LUA=${WITH_LUA} \
   -D WITH_MYSQL=${WITH_MYSQL} \
   -D WITH_SQLITE3=${WITH_SQLITE3} \
   -D WITH_PGSQL=${WITH_PGSQL} \
   -D WITH_ODBC=${WITH_ODBC} \
   -D CMAKE_INSTALL_PREFIX=/ \
-  ../ && make
+  ../ && cd build && make
 
 ################################################################################
 FROM build-${MODE} AS build
 
 ### Install
+WORKDIR /src/build
 RUN make install && chown -R 1001:1001 /var/pvpgn /etc/pvpgn
 
 ################################################################################
