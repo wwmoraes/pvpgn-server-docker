@@ -36,7 +36,12 @@ Aims to be:
 - 🗜 small - based on Alpine linux
 - ⚖ lightweight - final image doesn't contain source or build tools
 
+Most users should be fine running the [official image][official-image-readme].
+Use this image if you prefer Alpine's smaller footprint or if you plan to develop
+on PvPGN, as the dependencies are installed only once here.
+
 [pvpgn-server]: https://github.com/pvpgn/pvpgn-server
+[official-image-readme]: https://github.com/pvpgn/pvpgn-server/blob/develop/README_DOCKER.md
 
 ## 🏁 Getting Started <a name = "getting_started"></a>
 
